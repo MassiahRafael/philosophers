@@ -1,0 +1,105 @@
+*Dia 28/01 - 18:44 - Ana*
+	em: init.c
+		- função nova (int nova());
+	
+	-----------Implementações novas--------------
+	- variável start adicionado na struct table
+	- função print em utils.c
+	
+	-----------------Dúvidas---------------------
+	
+	------------Ações necessárias----------------
+	- verificar usabilidade da check_arg da push_swap aqui
+	- coclocar a referencia da table em phil_info
+	- terminar função de imprimir
+		- oq precisa para terminar?
+	- criar rotina de pensar
+	- criar rotina de dormir
+	- criar rotina de comer
+		- Salvar o tempo em que o phil comeu
+	- criar função NOW - tempo.
+	- 
+	--------------Problemas novos-----------------
+	- Git quebrado
+	
+
+*Dia 29/01 - 08:49 - Rafael*
+
+	em :aux_libft.c
+		- ft_isdigit()
+	em :check_input.c
+		- is_number()
+		- ft_check_input()
+	
+	-----------Implementações novas--------------
+	- checagem de argumentos em check_input.c
+		- checagem se o numero de argumentos esta
+	entre 5 e 6 
+		- checagem se só existem números nos argumentos;
+	
+	- colocar a referencia da table em phil_info
+		- Adicionado essa decleração do tipo t_table para conseguir usar na estrutura t_phill no arquivo philosophers.h
+			- typedef struct s_table	t_table;
+		- Adicionado a inicialização da variavel table da estrutura s_phill na função init_phils() no arquivo init.c
+	
+	
+	-----------------Dúvidas---------------------
+	- Estamos iniciando a mutex printer??
+
+	------------Ações necessárias----------------
+	- colocar a referencia da table em phil_info - ok
+		
+	- terminar função de imprimir
+		- oq precisa para terminar?
+	- criar rotina de pensar
+	- criar rotina de dormir
+	- criar rotina de comer
+		- Salvar o tempo em que o phil comeu
+	- criar função NOW - tempo.
+	- 
+	--------------Problemas novos-----------------
+
+
+*Dia 29/01 - 19 - Bia*
+
+em: routines.c
+	- take_fork
+	- eating	
+em: philosophers.h -> s_table
+	- int is_dead
+	- int is_satisfied
+em: init.c
+	- init_forks
+
+
+-----------Implementações novas--------------
+1) mudança na lógica dos forks (em init.c)
+	váriaveis fork_left e fork_right passaram a guardar a posição do garfo esquerdo e direito ao invés da mutex correspondente.
+ex.: phil->id: 1 | fork_left: 0 | right: 1
+	(array de mutex) fork[fork_left] -> consulta o mutex do garfo esquerdo
+	(array de mutex) fork[fork_right] -> consulta o mutex do garfo esquerdo
+	(array de int)   fork_status[fork_left] -> consulta se o garfo esquerod está na mesa
+	(array de int)   fork_status[fork_ (right] -> consulta se o garfo direito está na mesa
+
+
+2) Função eating (routine.c)
+	imprimi "is eating" quando o filósofo está com os dois garfos fora da mesa e trava os mutex para que outro filósofo n tente checar a condição no tempo em que o outro está comendo;
+
+3) Função finished (utils.c)
+	Checar se todos os filósofos estão satifeitos (variável satisfied de s_table);
+
+
+*Dia 30/01 - 08:49 - Rafael*
+
+	em :
+		-
+	em :
+		- 
+	
+	-----------Implementações novas--------------
+	
+	-----------------Dúvidas---------------------
+
+	------------Ações necessárias----------------
+	 
+	--------------Problemas novos-----------------
