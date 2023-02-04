@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   init.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rmassiah <rmassiah@student.42.rio>         +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/02/04 17:36:26 by rmassiah          #+#    #+#             */
+/*   Updated: 2023/02/04 17:36:28 by rmassiah         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "philosophers.h"
 
 t_table	*init_table(int argc, char **argv)
@@ -8,14 +20,13 @@ t_table	*init_table(int argc, char **argv)
 	table->start = 0;
 	table->is_dead = 0;
 	table->satisfied = 0;
-	table->phils_number = atoi(argv[1]);
-	table->time_to_die = atoi(argv[2]);
-	table->time_to_eat = atoi(argv[3]);
-	table->time_to_sleep = atoi(argv[4]);
+	table->phils_number = ft_atoi(argv[1]);
+	table->time_to_die = ft_atoi(argv[2]);
+	table->time_to_eat = ft_atoi(argv[3]);
+	table->time_to_sleep = ft_atoi(argv[4]);
 	pthread_mutex_init(&table->check_dead, NULL);
-	pthread_mutex_init(&table->dinner_mutex, NULL);
 	if (argc == 6)
-		table->eat_limit = atoi(argv[5]);
+		table->eat_limit = ft_atoi(argv[5]);
 	else
 		table->eat_limit = -1;
 	return (table);

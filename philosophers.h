@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   philosophers.h                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rmassiah <rmassiah@student.42.rio>         +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/02/02 14:25:32 by ade-sous          #+#    #+#             */
+/*   Updated: 2023/02/04 17:37:59 by rmassiah         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef PHILOSOPHERS_H
 # define PHILOSOPHERS_H
 
@@ -9,11 +21,11 @@
 
 typedef struct s_table	t_table;
 
-typedef struct s_phil { //informações dos filósofos
+typedef struct s_phil {
 	int				id;
-	int				dead;       //se já morreu ou não
-	int				dinner_number;      //quantas vezes já comeu
-	int				eating;            //se está comendo
+	int				dead;
+	int				dinner_number;
+	int				eating;
 	time_t			last_dinner;
 	int				fork_left;
 	int				fork_right;
@@ -22,20 +34,19 @@ typedef struct s_phil { //informações dos filósofos
 }	t_phil;
 
 typedef struct s_table {
-	int				phils_number;     //número de filosofos
-	int				time_to_die;       //tempo de morte ao ficar sem comer
-	int				time_to_eat;       //tempo gasto comendo
-	int				time_to_sleep;     //tempo gasto dormindo
-	int				eat_limit;		   //limite de vezes que precisa comer
-	long int		start;			   //início do programa
+	int				phils_number;
+	int				time_to_die;
+	int				time_to_eat;
+	int				time_to_sleep;
+	int				eat_limit;
+	long int		start;
 	int				is_dead;
-	int				satisfied;		   //número de phils satisfeitos
-	int				*forks_status;     //para saber garfos disponíveis
-	t_phil			*phils_infos;      //struct de cada filósofo
-	pthread_mutex_t	dinner_mutex;          //controlar a impressão
-	pthread_mutex_t	*fork;             //garfos (mutex)
-	pthread_mutex_t	printer;          //controlar a impressão
-	pthread_mutex_t	check_dead;          //controlar a morte
+	int				satisfied;
+	int				*forks_status;
+	t_phil			*phils_infos;
+	pthread_mutex_t	*fork;
+	pthread_mutex_t	printer;
+	pthread_mutex_t	check_dead;
 }	t_table;
 
 t_table	*init_table(int argc, char **argv);
@@ -58,6 +69,5 @@ void	free_table(t_table *table);
 int		waiter(t_table *table);
 void	smart_sleep(long int us, t_table *table);
 void	start_dinner(t_table *table, pthread_t *t);
-
-//obs.: fazer um mutex para não analisar se morreu com o filósofo comendo, pois se elee stá comendo, está vivo.
+int		ft_atoi(const char *str);
 #endif

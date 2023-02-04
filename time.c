@@ -1,26 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free_table.c                                       :+:      :+:    :+:   */
+/*   time.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rmassiah <rmassiah@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/04 17:32:51 by rmassiah          #+#    #+#             */
-/*   Updated: 2023/02/04 17:33:09 by rmassiah         ###   ########.fr       */
+/*   Created: 2023/02/04 17:38:48 by rmassiah          #+#    #+#             */
+/*   Updated: 2023/02/04 17:39:14 by rmassiah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-void	free_table(t_table *table)
+time_t	get_time(void)
 {
-	if (!table)
-		return ;
-	if (table->fork)
-		free(table->fork);
-	if (table->forks_status)
-		free(table->forks_status);
-	if (table->phils_infos)
-		free(table->phils_infos);
-	free(table);
+	struct timeval	time;
+
+	gettimeofday(&time, NULL);
+	return (time.tv_sec * 1000 + time.tv_usec / 1000);
+}
+
+time_t	diff_time(time_t start, time_t end)
+{
+	return (end - start);
+}
+
+void	smart_sleep(long int us, t_table *table)
+{
+	long int	start;
+
+	start = get_time();
+	while ((get_time() - start) <= us)
+	{
+		if (table->is_dead == 1)
+		{	
+			break ;
+		}
+		usleep(100);
+	}
+	return ;
 }

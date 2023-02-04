@@ -1,16 +1,27 @@
-all: main
+NAME		= philo
 
-CC = clang
-override CFLAGS += -g -Wno-everything -pthread -lm
+CC			= cc
+CFLAGS		= -Wall -Wextra -Werror
+RM			= rm -f
 
-SRCS = $(shell find . -name '.ccls-cache' -type d -prune -o -type f -name '*.c' -print)
-HEADERS = $(shell find . -name '.ccls-cache' -type d -prune -o -type f -name '*.h' -print)
+SRCS 		= check_input.c init.c time.c aux_libft.c free_table.c main.c routines.c utils.c
 
-main: $(SRCS) $(HEADERS)
-	$(CC) $(CFLAGS) $(SRCS) -o "$@"
+OBJS		= $(SRCS:.c=.o)
 
-main-debug: $(SRCS) $(HEADERS)
-	$(CC) $(CFLAGS) -O0 $(SRCS) -o "$@"
+all:		$(NAME)
+
+$(NAME):	$(OBJS)
+			$(CC) $(CFLAGS) $(OBJS) -o $(NAME)
+
+.c.o:
+			$(CC) $(CFLAGS) -o $@ -c $<
 
 clean:
-	rm -f main main-debug
+			$(RM) $(OBJS)
+
+fclean:		clean
+			$(RM) $(NAME)
+
+re:			fclean all
+
+.PHONY:		all clean fclean re

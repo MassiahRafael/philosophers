@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rmassiah <rmassiah@student.42.rio>         +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/02/04 17:09:00 by rmassiah          #+#    #+#             */
+/*   Updated: 2023/02/04 17:36:01 by rmassiah         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "philosophers.h"
 
 void	*thread_func(void *routine)
@@ -5,8 +17,8 @@ void	*thread_func(void *routine)
 	t_phil	*phils;
 
 	phils = (t_phil *)routine;
-	if (phils->id % 2 == 0)
-		usleep(200);
+	if (phils->id % 2 == 1)
+		usleep(500);
 	while (!finished(phils->table))
 	{
 		take_forks(phils);
@@ -22,20 +34,19 @@ void	*thread_func(void *routine)
 void	start_dinner(t_table *table, pthread_t *t)
 {
 	int	i;
-	int	s;
 
 	i = 0;
 	while (i < table->phils_number)
 	{
 		table->phils_infos[i].last_dinner = table->start;
-		s = pthread_create(&t[i], NULL, thread_func, &table->phils_infos[i]);
+		pthread_create(&t[i], NULL, thread_func, &table->phils_infos[i]);
 		i++;
 	}
 	i = 0;
 	waiter(table);
 	while (i < table->phils_number)
 	{
-		s = pthread_join(t[i], NULL);
+		pthread_join(t[i], NULL);
 		i++;
 	}
 }
